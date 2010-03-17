@@ -92,8 +92,8 @@ def typograf(text):
 
 def get_logger():
     logger = logging.getLogger()
-    hdlr = logging.StreamHandler(sys.stderr)
-    formatter = logging.Formatter('[%(asctime)s]%(levelname)-8s"%(message)s"','%Y-%m-%d %a %H:%M:%S')
+    hdlr = logging.StreamHandler()
+    formatter = logging.Formatter('[%(asctime)s] %(levelname)-8s"%(message)s"','%Y-%m-%d %a %H:%M:%S')
 
     hdlr.setFormatter(formatter)
     logger.addHandler(hdlr)
