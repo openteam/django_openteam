@@ -4,6 +4,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import models
 import logging
+import sys
 from types import ListType, DictType
 
 # --------------------------------------------------------------------------- #
@@ -91,7 +92,7 @@ def typograf(text):
 
 def get_logger():
     logger = logging.getLogger()
-    hdlr = logging.FileHandler(settings.LOG_FILE)
+    hdlr = logging.StreamHandler(sys.stderr)
     formatter = logging.Formatter('[%(asctime)s]%(levelname)-8s"%(message)s"','%Y-%m-%d %a %H:%M:%S')
 
     hdlr.setFormatter(formatter)
@@ -103,5 +104,6 @@ def get_logger():
 
 def debug(msg):
     logger = get_logger()
+    logger.setLevel(logging.DEBUG)
     logger.debug(msg)
 
