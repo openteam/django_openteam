@@ -4,6 +4,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import models
 import logging
+import sys
 from types import ListType, DictType
 
 # --------------------------------------------------------------------------- #
