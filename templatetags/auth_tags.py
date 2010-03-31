@@ -3,7 +3,10 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.template import Library, TemplateSyntaxError
 from django.utils.translation import ugettext_lazy as _
 
-form django_openteam.utils import debug
+from django_openteam.utils import debug
+
+
+register = Library()
 
 try:
     from django_openid_auth.forms import OpenIDLoginForm
@@ -14,16 +17,13 @@ try:
         context.update({
             'form': OpenIDLoginForm()
         })
-                
+
         return context
 
 except ImportError, ex:
     debug(_("Failed to import django_openid_auth: %(message)s") % {
         'message': ex,
         })
-
-register = Library()
-
 
 
 @register.inclusion_tag('forms/auth.html', takes_context=True)
