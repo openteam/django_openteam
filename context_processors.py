@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 
+from datetime import datetime
 
 def static(request):
     """Adds static media context variables to the context"""

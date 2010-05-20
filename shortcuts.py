@@ -22,15 +22,15 @@ except ImportError:
 
 def get_object_or_none(klass, *args, **kwargs):
     if isinstance(klass, Manager):
-       manager = klass
-       klass = manager.model
+        manager = klass
+        klass = manager.model
     else:
-       manager = klass._default_manager
+        manager = klass._default_manager
 
-       try:
-           return manager.get(*args, **kwargs)
-       except klass.DoesNotExist:
-           return None
+        try:
+            return manager.get(*args, **kwargs)
+        except klass.DoesNotExist:
+            return None
 
 
 def redirect_to_view(view_name, *args, **kwargs):

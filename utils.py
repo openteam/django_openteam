@@ -1,11 +1,16 @@
 # -*- mode: python -*- coding: utf-8 -*-
 from datetime import datetime
 from decimal import Decimal
+
 from django.conf import settings
+from django.core.mail import EmailMessage
 from django.db import models
+from django.template import loader
+
 import logging
 import sys
 from types import ListType, DictType
+
 
 # --------------------------------------------------------------------------- #
 
@@ -106,4 +111,28 @@ def debug(msg):
     logger = get_logger()
     logger.setLevel(logging.DEBUG)
     logger.debug(msg)
+
+
+
+def send_email(to, tpl, context):
+    """
+    """
+    to = "<%s>" % to    
+    message = EmailMessage(
+        subject = loader.render_to_string('emails/%s.subj.html' % tpl,
+            context,
+        ),
+        body = loader.render_to_string('emails/%s.body.html' % tpl,
+            context,
+        ),
+        from_email = settings.DEFAULT_FROM_EMAIL,
+        to = [to, ],
+    )
+    message.content_subtype = 'plain'
+
+    try:
+        message.send()
+
+    except Error, e:
+        debug(e)
 
