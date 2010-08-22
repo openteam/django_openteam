@@ -117,12 +117,12 @@ def debug(msg):
 def send_email(to, tpl, context):
     """
     """
-    to = "<%s>" % to    
+    to = "<%s>" % to
     message = EmailMessage(
-        subject = loader.render_to_string('emails/%s.subj.html' % tpl,
+        subject = loader.render_to_string('email/%s.subj.html' % tpl,
             context,
         ),
-        body = loader.render_to_string('emails/%s.body.html' % tpl,
+        body = loader.render_to_string('email/%s.body.html' % tpl,
             context,
         ),
         from_email = settings.DEFAULT_FROM_EMAIL,
@@ -133,6 +133,6 @@ def send_email(to, tpl, context):
     try:
         message.send()
 
-    except Error, e:
+    except Exception, e:
         debug(e)
 

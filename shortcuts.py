@@ -3,7 +3,6 @@
 from django.db.models import Manager
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from django.utils import simplejson
 from django.http import HttpResponse
 
 from utils import json_encode
@@ -14,7 +13,7 @@ try:
     json_dec = cjson.decode
 
 except ImportError:
-    import simplejson
+    from django.utils import simplejson
     json_enc = simplejson.dumps
     json_dec = simplejson.loads
 

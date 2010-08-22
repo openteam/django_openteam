@@ -6,7 +6,7 @@ from datetime import datetime
 def static(request):
     """Adds static media context variables to the context"""
     return {
-        'site': Site.objects.get(pk = settings.SITE_ID),
+        'SITE': Site.objects.get_current(),
         'CSS_URL': settings.CSS_URL,
         'IMG_URL': settings.IMG_URL,
         'JS_URL': settings.JS_URL,

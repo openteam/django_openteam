@@ -1,5 +1,5 @@
 from django.core import exceptions
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -17,7 +17,7 @@ def ajax_only(view):
         if request.is_ajax():
             return view(request, *args, **kwargs)
         else:
-            return HttpResponse('This view is requires AJAX request', status=400)
+            return HttpResponse('This view accepts only AJAX request object', status=400)
     return wrap
 
 # --------------------------------------------------------------------------- #
@@ -32,7 +32,7 @@ def post_only(view):
         if request.method == 'POST':
             return view(request, *args, **kwargs)
         else:
-            return HttpResponse('This view is requires POST method', status=400)
+            return HttpResponse('This view accepts only POST method', status=400)
     return wrap
 
 
