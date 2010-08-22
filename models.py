@@ -18,7 +18,7 @@ class NameModel (models.Model):
         abstract = True
 
 
-class Timestamp (models.Model):
+class TimestampModel (models.Model):
     """
         Model representing creation and updatetin timestamp fields
     """
