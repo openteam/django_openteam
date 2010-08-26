@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.template import Library, TemplateSyntaxError
 from django.utils.translation import ugettext_lazy as _
 
-from django_openteam.utils import debug
+from openteam.utils import debug
 
 
 register = Library()
