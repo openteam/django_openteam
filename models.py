@@ -28,7 +28,7 @@ class TimestampModel (models.Model):
 
     def save(self, *args, **kwargs):
         self.updated_at = datetime.utcnow()
-        super(Timestamp, self).save(*args, **kwargs)
+        super(TimestampModel, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
