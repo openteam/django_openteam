@@ -7,12 +7,13 @@ from django.core.mail import EmailMessage
 from django.db import models
 from django.template import loader
 
+from types import ListType, DictType
 import logging
 import sys
-from types import ListType, DictType
-
+import re
 
 # --------------------------------------------------------------------------- #
+SINGLE_LINE = re.compile('.+')
 
 def json_encode(data):
     """
@@ -118,13 +119,13 @@ def send_email(to, tpl, context):
     """
     """
     to = "<%s>" % to
+    # here we check that email subject isn't multiline
+    dirty_subject = loader.render_to_string('email/%s.subj.html' % tpl, context)
+    clean_subject = SINGLE_LINE.match(dirty_subject).group()
+
     message = EmailMessage(
-        subject = loader.render_to_string('email/%s.subj.html' % tpl,
-            context,
-        ),
-        body = loader.render_to_string('email/%s.body.html' % tpl,
-            context,
-        ),
+        subject = clean_subject,
+        body    = loader.render_to_string('email/%s.body.html' % tpl, context),
         from_email = settings.DEFAULT_FROM_EMAIL,
         to = [to, ],
     )
