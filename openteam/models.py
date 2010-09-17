@@ -10,7 +10,7 @@ class NameModel (models.Model):
         Abstract model representing 'name' field with apropriate unicode
         representation
     """
-    name = models.CharField(_('name'), max_length=255)
+    name = models.CharField(u'название', max_length=255)
 
     __unicode__ = lambda self: self.name
 
