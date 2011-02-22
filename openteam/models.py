@@ -53,3 +53,11 @@ class TaggableModel (models.Model):
         self.tags = self.__prepare_tags()
         super(TaggableModel, self).save(*args, **kwargs)
 
+
+class SortableModel (models.Model):
+    sort_order = models.IntegerField(_('sort order'), default=100)
+
+    class Meta:
+        abstract = True
+        ordering = ["sort_order",]
+
