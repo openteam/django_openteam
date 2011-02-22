@@ -33,3 +33,23 @@ class TimestampModel (models.Model):
     class Meta:
         abstract = True
 
+
+class TaggableModel (models.Model):
+
+    tags = models.TextField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+    def __prepare_tags(self):
+        if tags and len(tags):
+            return ",".join([ tag.strip() for tag in self.tags.split(',')])
+
+        else:
+            return self.tags
+
+    def save(self, *args, **kwargs):
+        self.tags = self.__prepare_tags()
+        super(TaggableModel, self).save(*args, **kwargs)
+
