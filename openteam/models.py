@@ -43,7 +43,7 @@ class TaggableModel (models.Model):
 
 
     def __prepare_tags(self):
-        if tags and len(tags):
+        if self.tags and len(self.tags):
             return ",".join([ tag.strip() for tag in self.tags.split(',')])
 
         else:
