@@ -7,15 +7,11 @@ from django.http import HttpResponse
 
 from utils import json_encode
 
-try:
-    import cjson
-    json_enc = cjson.encode
-    json_dec = cjson.decode
+import json
 
-except ImportError:
-    from django.utils import simplejson
-    json_enc = simplejson.dumps
-    json_dec = simplejson.loads
+
+json_enc = json.dumps
+json_dec = json.loads
 
 
 

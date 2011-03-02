@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.template import Library, TemplateSyntaxError
 from django.conf import settings
 import urllib, bitly
