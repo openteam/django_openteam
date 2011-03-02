@@ -1,6 +1,11 @@
 # -*- mode: python -*- coding: utf-8 -*-
+import logging
+import sys
+import re
+import urllib
 from datetime import datetime
 from decimal import Decimal
+from lxml import etree
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -8,9 +13,6 @@ from django.db import models
 from django.template import loader
 
 from types import ListType, DictType
-import logging
-import sys
-import re
 
 # --------------------------------------------------------------------------- #
 SINGLE_LINE = re.compile('.+')
@@ -88,7 +90,6 @@ def json_encode(data):
 def typograf(text):
     """Das russisch typograph. Achtung dreckschwein.
     """
-    import urllib
     url = "http://www.typograf.ru/webservice/"
     params = urllib.urlencode( {'text': text.encode('utf-8'),'chr':'UTF-8'} )
     f = urllib.urlopen(url, params)
@@ -112,6 +113,13 @@ def debug(msg):
     logger = get_logger()
     logger.setLevel(logging.DEBUG)
     logger.debug(msg)
+
+
+def html2text(text):
+    return etree.tostring(
+        etree.HTML(text),
+        encoding='utf8', method='text'
+    )
 
 
 
