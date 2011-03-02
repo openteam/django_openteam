@@ -9,7 +9,7 @@ setup(
     author_email='nimnull@gmail.com',
     license='BSD',
     version='0.1.0',
-    install_requires=['Django','lxml','python-cjson'],
+    install_requires=['Django','lxml'],
     py_modules=['openteam'],
     packages=find_packages(),
 )
