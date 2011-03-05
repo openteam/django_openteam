@@ -129,7 +129,11 @@ def send_email(to, tpl, context):
     to = "<%s>" % to
     # here we check that email subject isn't multiline
     dirty_subject = loader.render_to_string('email/%s.subj.html' % tpl, context)
-    clean_subject = SINGLE_LINE.match(dirty_subject).group()
+    match = SINGLE_LINE.match(dirty_subject)
+    if match:
+        clean_subject = match.group()
+    else:
+        clean_subject = dirty_subject
 
     message = EmailMessage(
         subject = clean_subject,
