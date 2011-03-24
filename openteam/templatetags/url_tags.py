@@ -8,7 +8,10 @@ register = Library()
 def bitly_url(context):
     api = bitly.Api(login=settings.BITLY_LOGIN, apikey=settings.BITLY_APIKEY)
     url_original = 'http://' + context['request'].META['HTTP_HOST'] + context['request'].META['PATH_INFO']
-    url_shorten = api.shorten(url_original)
+    try:
+        url_shorten = api.shorten(url_original)
+    except TypeError:
+        url_shorten = "#"
     context.update({
         'url': url_shorten
     })
